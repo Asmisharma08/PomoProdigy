@@ -1,1 +1,3 @@
-# PomoProdigy
+<h1>POMO PRODIGY</h1>
+<p>My idea was to make a Pomodoro Timer that would force users to not be able to stop the timer and when the mini pause ends it says "Can't belive you waited for it to end", it would make the users super productive. It is not for the weak. it is for Tate fans.</p>
+<p>And as for Cash Swift that is my unfinished project that really interested me. The algorithms, the logical thinking and problem solving are my best side. Coding may not be best side but i am learning it as i go but to be quite frankly coding is getting automated as i write this. So focus more on the idea written in the code.  </p>
