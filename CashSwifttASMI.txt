@@ -1,0 +1,94 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());     //This task really intrigued me although i had less time to do this task so i also did the pomodoro task
+}                      //I love design thinking and problem solving so loved this task and so i'm gonna complete this task for myself even though this is how much i am submitting right now
+                       //I learnt flutter and dart for this and it was a great experience
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black26
+      appBar: AppBar(
+      title: Text('CashSwift'),
+        centreTitle: true
+        backgroundColor: Colors.black12,
+      ),  //AppBar
+    body: Padding(
+      padding:EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
+      child:Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+       children: <Widget>[
+         Text(
+          'NAME',
+         style: TextStyle(
+          color: Colors.grey,
+          letterSpacing: 2.0,
+          fontWeight: FontWeight.bold
+         )  //TextStyle
+       ),  //Text
+       SizedBox(height: 10.0),
+         Text(
+          'Asmi'
+         style: TextStyle(
+           color: Colors.orangeAccent,
+           letterSpacing: 2.0,
+           fontSize: 28.0
+           fontWeight: FontWeight.bold
+          )  //TextStyle
+           ), //Text
+       SizedBox(height: 30.0),
+         Text(
+           'Current Currency Level',
+         style: TextStyle(
+           color: Colors.grey,
+           letterSpacing: 2.0,
+           fontWeight: FontWeight.bold
+         )  //TextStyle
+        ), //Text
+       SizedBox(height: 10.0),
+         Text(
+           '5000rs'
+         style: TextStyle(
+            color: Colors.orangeAccent,
+            letterSpacing: 2.0,
+            fontSize: 28.0
+            fontWeight: FontWeight.bold
+         )  //TextStyle
+        ), //Text
+       SizedBox(height: 30.0),
+       Row(
+         children: <Widget>[
+           Icon(
+             Icons.email,
+             color: Colors.grey,
+           ), //Icon
+       SizedBox(width: 10.0),
+         Text(
+           '9315005624@cashswift'
+         style: TextStyle(
+             color: colors.grey,
+             fontSize: 18.0,
+             letterSpacing: 1.0,
+         ), //TextStyle
+        ), //Text
+    ], //<Widget>[]
+
+    /*My basic idea for this app was that first for frontend
+     i want to show a very classy looking app that would handle a persons upi transactions,bills and credit cards.
+     You dont even have to take your credit card out it will all be in one app
+     */
+    /*people will be able to load money into their accounts
+    Transaction History,updating profile info, transfer,
+    deduct the transferred amount from the sender's account balance and update the receiver's account
+    their UPI ID'S will be such 9315005624@cashswift)
+     */
+
+    /*In backend set up a database to store user account information like MySQL.
+    It will store user information securely in the database and use encryption for safety.
+    These days the biggest problem is trust.
+    Safety will be the biggest thing i'll put all my focus on implementing robust authentication mechanisms to verify the identity of users accessing the backend systems.
+     */
+
+
+

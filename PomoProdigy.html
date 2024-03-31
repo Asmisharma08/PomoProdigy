@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PomoProdigy</title>
+    <style>          
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background-color: #E98074;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #E98074;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .timer {
+            font-size: 36px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .clock {
+            width: 120px;
+            height: 120px;
+            background-color: #FF6347;     /* Since Pomodoros are associated with tomatoes i tried showing a clock that looked like a tomato and also thus the red colour*/
+            border-radius: 50%;             /* I used CSS to show the styles */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .clock-stem {
+            width: 20px;
+            height: 50px;
+            background-color: #006400;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        .clock-leaf {
+            width: 20px;
+            height: 20px;
+            background-color: #006400;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        .clock-face {
+            width: 90%;
+            height: 90%;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .clock-hands {
+            position: absolute;
+            width: 2px;
+            background-color: #000;
+            transform-origin: bottom center;
+        }
+
+        .hour-hand {
+            height: 30%;
+        }
+
+        .minute-hand {
+            height: 40%;
+        }
+
+        .hour-markers {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background-color: #000;
+            transform-origin: bottom center;
+            top: 50%;
+            left: 50%;
+        }
+
+        .message {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            margin: 0 5px;
+        }
+
+        #completedSessions {
+            text-align: center;
+            margin-top: 20px;
+            padding-left: 0;
+            list-style-type: none;
+        }
+
+        #completedSessions li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PomoProdigy</h1>
+        <div class="timer-container">
+            <div class="timer" id="timer">25:00</div>
+            <div class="clock">
+                <div class="clock-stem"></div>
+                <div class="clock-leaf"></div>
+                <div class="clock-face">
+                    <div class="clock-hands hour-hand"></div>
+                    <div class="clock-hands minute-hand"></div>
+                </div>
+            </div>
+        </div>
+        <div class="message" id="message"></div>
+        <div class="controls">
+            <button id="POMOBUTTON">POMO</button>
+            <button id="MINIPAUSEBUTTON">MINIPAUSE</button>
+            <button id="STOPBUTTON">STOP</button>
+            <button id="RESETBUTTON">RESET</button>
+        </div>
+        <ul id="completedSessions">COMPLETED SESSIONS:</ul>  <!-- This will display the completed sessions -->
+    </div>
+
+    <script>
+        let timerInterval;
+        let completedSessions = [];
+
+        function startTimer(duration) {
+            clearInterval(timerInterval); 
+            let time = duration * 60; // minutes to seconds conversion 
+            timerInterval = setInterval(() => {
+                let minutes = parseInt(time / 60, 10);
+                let seconds = parseInt(time % 60, 10);
+
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                document.getElementById('timer').textContent = minutes + ":" + seconds;
+
+                if (--time < 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('message').textContent = endMessage; // Set end message
+                    completedSessions.push({ duration: duration, completedAt: new Date() });
+                    updateCompletedSessions(); 
+                    if(endMessage === "Time Up") {  // Check if it's the Pomodoro timer
+                        alert("Time Up"); // Show a pop-up message for Pomodoro timer
+                    } else {
+                        alert("No"); // Show a pop-up message for mini pause timer
+                    }
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);      //This code has CSS,HTML and Javascript
+        }                                      //I used Javascript for functionality of the buttons and the timer 
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            document.getElementById('timer').textContent = '25:00';      // Reset timer display to initial value
+            document.getElementById('message').textContent = '';         // Clear any previous message
+        }
+
+        document.getElementById('POMOBUTTON').addEventListener('click', function() {
+            startTimer(25); // Start 25-minute timer
+            document.getElementById('message').textContent = ''; 
+        });
+
+        document.getElementById('MINIPAUSEBUTTON').addEventListener('click', function() {
+            startTimer(5); // Start 5-minute timer
+            document.getElementById('message').textContent = ''; 
+        });
+
+        document.getElementById('STOPBUTTON').addEventListener('click', stopTimer);
+
+        document.getElementById('RESETBUTTON').addEventListener('click', resetTimer);
+
+        function updateCompletedSessions() {
+            let sessionList = document.getElementById('completedSessions');
+            sessionList.innerHTML = '';     //It will clear previous session 
+
+            completedSessions.forEach(session => {
+                let sessionItem = document.createElement('li');
+                sessionItem.textContent = `Completed ${session.duration}-minute session at ${session.completedAt.toLocaleString()}`;
+                sessionList.appendChild(sessionItem);
+            });
+        }
+    </script>
+</body>
+</html>
